@@ -53,31 +53,27 @@ int main() {
                 strcat(result, now);
             }
 
-            // If numdig is odd, add "0000" to the end
             if (even % 2 != 0) {
                 strcat(result, "0000");
             }
 
-            // Write the encoded result to a new file with proper extension
             char outputFileName[100];
-            strncpy(outputFileName, file, strlen(file) - strlen(type)); // Remove extension
-            outputFileName[strlen(file) - strlen(type)] = '\0'; // Null-terminate
+            strncpy(outputFileName, file, strlen(file) - strlen(type)); 
+            outputFileName[strlen(file) - strlen(type)] = '\0'; 
             strcat(outputFileName, "bin");
             writeToFile(outputFileName, result);
         } else if (strcmp(choice, "-d") == 0 && strcmp(type, "bin") == 0) {
-            // Decompression operation
              int numdig = strlen(content) / 4;
             int dig = strlen(content);
             for (int i = numdig - 1; i >= 0; i--) {
-                char* now = code_BinToNum(content + i * 4);  // Pass a pointer to the substring
+                char* now = code_BinToNum(content + i * 4);  
                 strcat(result, now);
                 memmove(content + i * 4, content + (i + 1) * 4, dig - (i + 1) * 4 + 1);
             }
             reverseString(result);
-            // Write the decoded result to a new file with proper extension
             char outputFileName[100];
-            strncpy(outputFileName, file, strlen(file) - strlen(type)); // Remove extension
-            outputFileName[strlen(file) - strlen(type)] = '\0'; // Null-terminate
+            strncpy(outputFileName, file, strlen(file) - strlen(type)); 
+            outputFileName[strlen(file) - strlen(type)] = '\0'; 
             strcat(outputFileName, "txt");
             writeToFile(outputFileName, result);
         } else {
