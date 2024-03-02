@@ -31,13 +31,12 @@ int main() {
             return 1;
         }
 
-        // Read the content of the file
         char content[1000];
-        size_t num_read = fread(content, sizeof(char), sizeof(content), fp);
+        int num_read = fread(content, sizeof(char), sizeof(content), fp);
         fclose(fp);
-        content[num_read] = '\0'; // Null-terminate the string
+        content[num_read] = '\0'; 
 
-        char result[1000] = {0}; // Initialize to zeros
+        char result[1000] = {0}; 
 
         if (strcmp(choice, "-c") == 0 && strcmp(type, "txt") == 0) {
             reverseString(content);
