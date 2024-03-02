@@ -9,3 +9,5 @@ char* code_BinToNum(char* comp);
 int numDig(int num);
 
 int getDigit(int num, int i);
+
+void reverseString(char* str);

@@ -40,6 +40,7 @@ int main() {
         char result[1000] = {0}; // Initialize to zeros
 
         if (strcmp(choice, "-c") == 0 && strcmp(type, "txt") == 0) {
+            reverseString(content);
             // Compression operation
             int num = atoi(content);
             int numdig = numDig(num);
@@ -48,7 +49,6 @@ int main() {
                 strcat(result, "1111");
                 even++;
             }
-            
             for (int i = numdig - 1; i >= 0; i--) {
                 char* now = code_NumToBin(getDigit(num, i));
                 strcat(result, now);
@@ -67,15 +67,14 @@ int main() {
             writeToFile(outputFileName, result);
         } else if (strcmp(choice, "-d") == 0 && strcmp(type, "bin") == 0) {
             // Decompression operation
-            int numdig = strlen(content) / 4;
+             int numdig = strlen(content) / 4;
             int dig = strlen(content);
-            for (int i = numdig-1; i >=0 ; i--) { // Change condition to < instead of <=
-                char* now = code_BinToNum(&content[i*4]);  // Pass a pointer to the substring
+            for (int i = numdig - 1; i >= 0; i--) {
+                char* now = code_BinToNum(content + i * 4);  // Pass a pointer to the substring
                 strcat(result, now);
-                memmove(content, content + 4, dig - 4 + 1);
-                dig -= 4;
+                memmove(content + i * 4, content + (i + 1) * 4, dig - (i + 1) * 4 + 1);
             }
-
+            reverseString(result);
             // Write the decoded result to a new file with proper extension
             char outputFileName[100];
             strncpy(outputFileName, file, strlen(file) - strlen(type)); // Remove extension
