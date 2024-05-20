@@ -1,16 +1,13 @@
-// test.c
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "compress.h"
 
 int main() {
-    char choice[10];
     char file[100];
+    int status;
 
     // Compression
-    strcpy(choice, "-c");
     strcpy(file, "input.txt");
     FILE* fp = fopen(file, "w");
     if (fp == NULL) {
@@ -20,10 +17,15 @@ int main() {
     fprintf(fp, "123456789");
     fclose(fp);
     printf("Performing compression with text file input...\n");
-    system("./compress -c input.txt");
+    status = system("./compress -c input.txt");
+    
+    if (status == 0) {
+        printf("Compression passed.\n");
+    } else {
+        printf("Compression failed with status %d.\n", status);
+    }
 
     // Decompression
-    strcpy(choice, "-d");
     strcpy(file, "input.bin");
     fp = fopen(file, "wb");
     if (fp == NULL) {
@@ -34,7 +36,12 @@ int main() {
     fwrite(content, sizeof(char), strlen(content), fp);
     fclose(fp);
     printf("\nPerforming decompression with binary file input...\n");
-    system("./compress -d input.bin");
+    status = system("./compress -d input.bin");
+    if (status == 0) {
+        printf("Decompression passed.\n");
+    } else {
+        printf("Decompression failed with status %d.\n", status);
+    }
 
     return 0;
 }
