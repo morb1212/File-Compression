@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Define the assertEquals function
+void assertEquals(const char* testName, const char* expected, const char* actual) {
+    if (strcmp(expected, actual) == 0) {
+        printf("%s passed.\n", testName);
+    } else {
+        printf("%s failed. Expected: %s, Actual: %s\n", testName, expected, actual);
+        exit(1);
+    }
+}
+
 int main() {
     char choice[10];
     char file[100];
@@ -20,7 +30,7 @@ int main() {
     fprintf(fp, "123456789");
     fclose(fp);
     printf("Performing compression with text file input...\n");
-    status = system("./compress -c inputC.txt"); 
+    status = system("./compress -c inputC.txt"); // Redirect output to /dev/null
     if (status != 0) {
         printf("Error creating compressed file.\n");
         return 1;
@@ -43,15 +53,7 @@ int main() {
     fclose(compressedFile);
 
     // Verify the contents of the compressed file
-    printf("Contents of compressed file: %s\n", compressedContent);
-
-    // Verify if the compressed content matches the expected output
-    if (strcmp(compressedContent, "1110110111001011101010011000011101100000") == 0) {
-        printf("Compression passed.\n");
-    } else {
-        printf("Compression failed.\n");
-        return 1;
-    }
+    assertEquals("Compression test", "1110110111001011101010011000011101100000", compressedContent);
 
     // Free the allocated memory for compressedContent
     free(compressedContent);
@@ -68,7 +70,7 @@ int main() {
     fwrite(content, sizeof(char), strlen(content), fp);
     fclose(fp);
     printf("\nPerforming decompression with binary file input...\n");
-    status = system("./compress -d inputD.bin"); 
+    status = system("./compress -d inputD.bin"); // Redirect output to /dev/null
     if (status != 0) {
         printf("Error during decompression.\n");
         return 1;
@@ -91,15 +93,7 @@ int main() {
     fclose(decompressedFile);
 
     // Verify the contents of the decompressed file
-    printf("Contents of decompressed file: %s\n", decompressedContent);
-
-    // Verify if the decompressed content matches the original input
-    if (strcmp(decompressedContent, "123456789") == 0) {
-        printf("Decompression passed.\n");
-    } else {
-        printf("Decompression failed.\n");
-        return 1;
-    }
+    assertEquals("Decompression test", "123456789", decompressedContent);
 
     // Free the allocated memory for decompressedContent
     free(decompressedContent);
