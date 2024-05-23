@@ -13,11 +13,13 @@ The program consists of two main functionalities:
 - **Output**: A binary file with the compressed numerical data.
 -  **Input**: A binary file containing compressed numerical data.
 - **Output**: A text file with the decompressed numerical data.
-## How to Compile
+## How to Start
 
-gcc -o compress.o compress.c bash make compress
+make run
+./compress
 
 ## How to test
-gcc -o test.o test.c bash make test
+make test
+./test
 
 
