@@ -21,6 +21,6 @@ make run
 ## How to test
 make test
 ./test
-Expected to see succses message and the required file transfered
+-Expected result: test complited with succses message and the required file transfered
 
 
