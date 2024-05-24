@@ -22,6 +22,6 @@ The program consists of two main functionalities:
 - Run command:
 - make test
 - ./test
-- Expected result: succses message and the required file transfered upon test complition
+- Expected result: succses message and the required file decoded or encoded upon test complition
 
 
