@@ -14,13 +14,14 @@ The program consists of two main functionalities:
 -  **Input**: A binary file containing compressed numerical data.
 - **Output**: A text file with the decompressed numerical data.
 ## How to Start
-
-make run
-./compress
+- Run command:
+- make run
+- ./compress
 
 ## How to test
-make test
-./test
--Expected result: succses message and the required file transfered upon test complition
+- Run command:
+- make test
+- ./test
+- Expected result: succses message and the required file transfered upon test complition
 
 
